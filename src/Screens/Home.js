@@ -1,4 +1,6 @@
+import axios from "axios";
 import { StatusBar } from "expo-status-bar";
+import { useEffect, useState } from "react";
 import { Image, ScrollView, Text, TextInput, View } from 'react-native';
 import {
   AdjustmentsHorizontalIcon,
@@ -8,15 +10,13 @@ import {
   heightPercentageToDP as hp
 } from "react-native-responsive-screen";
 import Categories from '../components/Categories';
-import { useEffect, useState } from "react";
-import axios from "axios";
 
 // 
 
 
 
  const Home = () => {
-  const [activeCategory, setActiveCategory] = useState("Beef")
+  const [activeCategory, setActiveCategory] = useState("")
   const [categories,setCategories] = useState("")
   const [meal,setMeal] = useState([])
 
@@ -43,7 +43,7 @@ console.log(error.message)
   const handleChangeCategory = (categories) =>{
     getRecipes(categories);
     setActiveCategory(categories)
-    setMeals([])
+    setMeal([])
   } 
 
   const getRecipes = async (category = "beef") =>{
@@ -52,7 +52,7 @@ console.log(error.message)
         `https://www.themealdb.com/api/json/v1/1/filter.php?c=${category}`
       );
       if (response && response.data) {
-        setMeals(response.data.meals);
+        setMeal(response.data.meals);
         // console.log(response.data.meal)
       }
 

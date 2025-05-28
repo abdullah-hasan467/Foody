@@ -22,6 +22,8 @@ const Categories = ({activeCategory, handleChangeCategory, categories}) => {
                     <TouchableOpacity key={index}
                     onPress={ () =>{
                         handleChangeCategory (category.strCategory)
+                        const items= category.strCategory
+                        
                     }} className="flex ites-center space-y-1">
                         <View className={"rounded-xl p-[10px] space-x-2 mt-5 " + activeButtonclass}>
                 <Image
