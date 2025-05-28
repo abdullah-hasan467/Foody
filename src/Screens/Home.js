@@ -10,6 +10,7 @@ import {
   heightPercentageToDP as hp
 } from "react-native-responsive-screen";
 import Categories from '../components/Categories';
+import Recipes from "../components/Recipes";
 
 // 
 
@@ -18,7 +19,7 @@ import Categories from '../components/Categories';
  const Home = () => {
   const [activeCategory, setActiveCategory] = useState("")
   const [categories,setCategories] = useState("")
-  const [meal,setMeal] = useState([])
+  const [meals,setMeals] = useState([])
 
 useEffect(()=>{
   getCategories()
@@ -43,7 +44,7 @@ console.log(error.message)
   const handleChangeCategory = (categories) =>{
     getRecipes(categories);
     setActiveCategory(categories)
-    setMeal([])
+    setMeals([])
   } 
 
   const getRecipes = async (category = "beef") =>{
@@ -52,7 +53,7 @@ console.log(error.message)
         `https://www.themealdb.com/api/json/v1/1/filter.php?c=${category}`
       );
       if (response && response.data) {
-        setMeal(response.data.meals);
+        setMeals(response.data.meals);
         // console.log(response.data.meal)
       }
 
@@ -129,12 +130,17 @@ console.log(error.message)
           )
         } 
 
+        <View>
+          <Recipes meals = {meals} categories = {categories}  />
+
+        </View>
+
 
 
 
 
       </ScrollView>
-      <Text>Home</Text>
+      
     </View>
   )
 }
